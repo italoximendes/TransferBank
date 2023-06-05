@@ -13,13 +13,13 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('sender_id');
-            $table->unsignedInteger('recipient_id');
-            $table->decimal('amount',8,2);
+            $table->unsignedBigInteger('remetente_id');
+            $table->unsignedInteger('destinatario_id');
+            $table->decimal('valor',8,2);
             $table->timestamps();
 
-            $table->foreign('sender_id')->references('id')->on('users');
-            $table->foreign('recipient_id')->references('id')->on('users');
+            $table->foreign('remetente_id')->references('id')->on('users');
+            $table->foreign('destinatario_id')->references('id')->on('users');
 
         });
     }
