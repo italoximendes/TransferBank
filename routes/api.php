@@ -13,7 +13,7 @@ Route::get('/users', [UserController::class, 'index']);
 Route::post('/users', [UserController::class, 'store']);
 
 Route::post('transfers', [TransferController::class, 'transfer']);
-Route::resource('deposits', [DepositController::class, 'deposit']);
+Route::post('deposits', [DepositController::class, 'deposit']);
 
 
 

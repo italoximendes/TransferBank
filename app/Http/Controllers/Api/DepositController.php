@@ -9,7 +9,6 @@ class DepositController extends Controller
 {
     public function deposit(Request $request, $userId)
     {
-        // Validação dos campos de entrada
         $request->validate([
             'valor' => 'required|numeric|min:0'
         ]);
