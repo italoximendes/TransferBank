@@ -1,24 +1,26 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 
 class DepositController extends Controller
 {
-    public function deposit(Request $request, $userId)
+    public function deposit(Request $request)
     {
-        $request->validate([
-            'valor' => 'required|numeric|min:0'
+        // Validação dos dados recebidos
+        $validatedData = $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'valor' => 'required|numeric|min:0',
         ]);
 
-        $user = User::findOrFail($userId);
-
-        // Realização do depósito
-        $user->saldo += $request->valor;
+        // Atualização do saldo do usuário
+        $user = User::findOrFail($validatedData['user_id']);
+        $user->balance += $validatedData['valor'];
         $user->save();
 
-        return response()->json(['message' => 'Depósito realizado com sucesso']);
+        return response()->json($user, 200);
     }
 }

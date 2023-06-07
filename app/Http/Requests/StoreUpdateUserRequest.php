@@ -23,7 +23,7 @@ class StoreUpdateUserRequest extends FormRequest
     {
         $rules = 
             [
-                'name' => 'required|min:3|max:255',
+                'name' => 'required|string|min:3|max:255',
                 'email' => [
                     'required',
                     'email',
@@ -63,9 +63,16 @@ class StoreUpdateUserRequest extends FormRequest
 
             if($this->method() === 'PATCH') {
 
+
+                $rules['name'] = [
+                    'nullable',
+                    'string',
+                    'min:3',
+                    'max:255',
+                ]; 
                 
                 $rules['email'] = [
-                    'required',
+                    'nullable',
                     'email',
                     'max:255',
                     "unique:users,email,{$this->id},id", 

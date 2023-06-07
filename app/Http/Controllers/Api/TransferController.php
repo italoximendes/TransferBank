@@ -1,45 +1,64 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Http\Controllers\Controller;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class TransferController extends Controller
 {
     public function transfer(Request $request)
     {
         // Validação dos campos de entrada
-        $request->validate([
+        $validatedData = $request->validate([
             'remetente_id' => 'required|exists:users,id',
             'destinatario_id' => 'required|exists:users,id',
             'valor' => 'required|numeric|min:0'
         ]);
 
-        $remetente = User::findOrFail($request->remetente_id);
-        $destinatario = User::findOrFail($request->destinatario_id);
 
-        // Verificação do saldo do remetente
+       // Verifica se o remetente tem saldo suficiente
+       $remetente = User::findOrFail($validatedData['remetente_id']);
+       if ($remetente->balance < $validatedData['valor']) {
+           throw ValidationException::withMessages([
+               'valor' => 'Saldo insuficiente para a transferência.',
+           ]);
+       }
 
+       // Inicia uma transação para garantir consistência
+       DB::beginTransaction();
 
-        if ($remetente->balance < $request->valor) {
-            return response()->json(['error' => 'Saldo insuficiente'], 400);
+       try {
+           // Atualiza o saldo do remetente
+           $remetente->balance -= $validatedData['valor'];
+           $remetente->save();
+           
+           
+           // Adiciona o valor à carteira do destinatário
+           $destinatario = User::findOrFail($validatedData['destinatario_id']);
+           $destinatario->balance += $validatedData['valor'];
+           $destinatario->save();
+
+           // Cria o registro da transferência
+           $transfer = Transaction::create([
+               'remetente_id' => $remetente->id,
+               'destinatario_id' => $destinatario->id,
+               'valor' => $validatedData['valor'],
+           ]);
+
+           // Confirma a transação
+           DB::commit();
+
+           return response()->json($transfer, 201);
+        } catch (\Exception $e) {
+            // Reverte a transação em caso de erro
+            DB::rollBack();
+
+            throw $e;
         }
-
-        // Realização da transferência
-        $remetente->balance -= $request->valor;
-        $destinatario->balance += $request->valor;
-
-        $transaction = Transaction::create([
-            'remetente_id' => $remetente->id,
-            'destinatario_id' => $destinatario->id,
-            'valor' => $request->valor
-        ]);
-
-        $remetente->save();
-        $destinatario->save();
-
-        return response()->json($transaction, 201);
     }
 }

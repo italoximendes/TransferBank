@@ -26,6 +26,19 @@ class User extends Authenticatable
         'password',
     ];
 
+      // Relacionamento de transferências enviadas pelo usuário
+      public function remetenteTransactions()
+      {
+          return $this->hasMany(Transaction::class, 'remetente_id');
+      }
+  
+      // Relacionamento de transferências recebidas pelo usuário
+      public function destinatarioTransactions()
+      {
+          return $this->hasMany(Transaction::class, 'destinatario_id');
+      }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *
