@@ -20,14 +20,24 @@ class TransferController extends Controller
             'valor' => 'required|numeric|min:0.01'
         ]);
 
+        // Verifica se o remetente é lojista
+
+        $remetente = User::findOrFail($validatedData['remetente_id']);
+        if ($remetente->cnpj == true ){
+        throw ValidationException::withMessages([
+            'id' => 'Lojistas não podem realizar transferências',
+        ]);
+        }
+
 
        // Verifica se o remetente tem saldo suficiente
-       $remetente = User::findOrFail($validatedData['remetente_id']);
+      
        if ( (float) $remetente->balance < $validatedData['valor']) {
            throw ValidationException::withMessages([
                'valor' => 'Saldo insuficiente para a transferência.',
            ]);
        }
+
 
        // Inicia uma transação para garantir consistência
        DB::beginTransaction();
