@@ -17,13 +17,4 @@ class Transaction extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function remetente()
-    // {
-    //     return $this->belongsTo(User::class, 'remetente_id');
-    // }
-
-    // public function destinatario()
-    // {
-    //     return $this->belongsTo(User::class, 'destinatario_id');
-    // }
 }

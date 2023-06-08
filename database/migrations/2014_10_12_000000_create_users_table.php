@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('cpf')->unique();
-            $table->string('cnpj')->unique();
+            $table->string('cnpj')->unique()->nullable();
             $table->decimal('balance',10,2)->default(0.00);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

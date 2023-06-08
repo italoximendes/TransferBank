@@ -33,7 +33,7 @@ class StoreUpdateUserRequest extends FormRequest
                 ],
 
                 'cpf' => [
-                    'nullable',
+                    'required',
                     'max:11',
                     'min:10',
                     'unique:users', 
@@ -72,7 +72,7 @@ class StoreUpdateUserRequest extends FormRequest
                 ]; 
                 
                 $rules['email'] = [
-                    'nullable',
+                    'required',
                     'email',
                     'max:255',
                     "unique:users,email,{$this->id},id", 
