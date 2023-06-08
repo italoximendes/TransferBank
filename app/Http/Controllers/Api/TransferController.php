@@ -17,13 +17,13 @@ class TransferController extends Controller
         $validatedData = $request->validate([
             'remetente_id' => 'required|exists:users,id',
             'destinatario_id' => 'required|exists:users,id',
-            'valor' => 'required|numeric|min:0'
+            'valor' => 'required|numeric|min:0.01'
         ]);
 
 
        // Verifica se o remetente tem saldo suficiente
        $remetente = User::findOrFail($validatedData['remetente_id']);
-       if ($remetente->balance < $validatedData['valor']) {
+       if ( (float) $remetente->balance < $validatedData['valor']) {
            throw ValidationException::withMessages([
                'valor' => 'Saldo insuficiente para a transferência.',
            ]);
@@ -34,13 +34,13 @@ class TransferController extends Controller
 
        try {
            // Atualiza o saldo do remetente
-           $remetente->balance -= $validatedData['valor'];
+           (float) $remetente->balance -= $validatedData['valor'];
            $remetente->save();
            
            
            // Adiciona o valor à carteira do destinatário
            $destinatario = User::findOrFail($validatedData['destinatario_id']);
-           $destinatario->balance += $validatedData['valor'];
+           (float) $destinatario->balance += $validatedData['valor'];
            $destinatario->save();
 
            // Cria o registro da transferência

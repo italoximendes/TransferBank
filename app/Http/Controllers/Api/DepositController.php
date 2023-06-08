@@ -12,13 +12,13 @@ class DepositController extends Controller
     {
         // Validação dos dados recebidos
         $validatedData = $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'destinatario_id' => 'required|exists:users,id',
             'valor' => 'required|numeric|min:0',
         ]);
 
         // Atualização do saldo do usuário
-        $user = User::findOrFail($validatedData['user_id']);
-        $user->balance += $validatedData['valor'];
+        $user = User::findOrFail( $validatedData['destinatario_id']);
+        (float) $user->balance += (float)$validatedData['valor'];
         $user->save();
 
         return response()->json($user, 200);

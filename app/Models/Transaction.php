@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\User;
 
 class Transaction extends Model
 {
@@ -11,13 +12,18 @@ class Transaction extends Model
 
     protected $fillable = ['remetente_id', 'destinatario_id', 'valor'];
 
-    public function remetente()
-    {
-        return $this->belongsTo(User::class, 'remetente_id');
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 
-    public function destinatario()
-    {
-        return $this->belongsTo(User::class, 'destinatario_id');
-    }
+    // public function remetente()
+    // {
+    //     return $this->belongsTo(User::class, 'remetente_id');
+    // }
+
+    // public function destinatario()
+    // {
+    //     return $this->belongsTo(User::class, 'destinatario_id');
+    // }
 }

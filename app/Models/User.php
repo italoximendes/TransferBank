@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Transaction;
 
 class User extends Authenticatable
 {
@@ -26,17 +27,21 @@ class User extends Authenticatable
         'password',
     ];
 
-      // Relacionamento de transferências enviadas pelo usuário
-      public function remetenteTransactions()
-      {
-          return $this->hasMany(Transaction::class, 'remetente_id');
-      }
+    public function transactions(){
+        return $this->hasMany(Transaction::class);
+    }
+
+    //   // Relacionamento de transferências enviadas pelo usuário
+    //   public function remetenteTransactions()
+    //   {
+    //       return $this->hasMany(Transaction::class, 'remetente_id');
+    //   }
   
-      // Relacionamento de transferências recebidas pelo usuário
-      public function destinatarioTransactions()
-      {
-          return $this->hasMany(Transaction::class, 'destinatario_id');
-      }
+    //   // Relacionamento de transferências recebidas pelo usuário
+    //   public function destinatarioTransactions()
+    //   {
+    //       return $this->hasMany(Transaction::class, 'destinatario_id');
+    //   }
 
 
     /**
