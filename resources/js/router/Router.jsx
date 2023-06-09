@@ -4,7 +4,7 @@ import {Routes, Route} from "react-router-dom"
 import IndexCadastro from '../pages/IndexCadastro'
 import IndexLogin from '../pages/IndexLogin'
 import NotFound from '../components/NotFound'
-import DashBoard from '../pages/DashBoard'
+import DashBoard from '../pages/dashboard/DashBoard'
 
 const Router = () => {
     return(
