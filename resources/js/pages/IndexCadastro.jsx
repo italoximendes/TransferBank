@@ -1,11 +1,11 @@
 import React,{useState} from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import IndexLayout from "../components/LayoutComponents/IndexLayout";
-// import 'sweetalert2/react/sweetalert2.js'
+import axios from "axios";
 
 const IndexCadastro = () => {
 
-    // const navigate = useNavigate()
+    const navigate = useNavigate()
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -14,30 +14,32 @@ const IndexCadastro = () => {
     const [balance, setBalance] = useState("")
     const [password, setPassword] =useState("")
 
-    // const store = async (e) => {
-    //     e.preventDefault()
+    const store = async (e) => {
+        e.preventDefault()
 
-    //     const formData = new FormData()
+        const formData = new FormData()
 
-    //     formData.append('name', name)
-    //     formData.append('email', email)
-    //     formData.append('CPF', CPF)
-    //     formData.append('CNPJ', CNPJ)
-    //     formData.append('balance', balance)
-    //     formData.append('password', password)
+        formData.append('name', name)
+        formData.append('email', email)
+        formData.append('CPF', CPF)
+        formData.append('CNPJ', CNPJ)
+        formData.append('balance', balance)
+        formData.append('password', password)
 
-    //     await axios.post('/api/app_product/', FormData)
-    //         .then(({data})=>{
-    //             toast.fire({
-    //                 icon:"success",
-    //                 title:"Ussuario cadastrado com sucesso"
-    //             })
-    //         })
-    //         .catch(({response})=>{
+        await axios.post('/api/users', FormData)
+            .then(({data})=>{
+                console.log('data', data)
+                toast.fire({
+                    icon:"success",
+                    title:"Usuario cadastrado com sucesso!"
+                })
+                navigate('/')
+            })
+            .catch(({response})=>{
 
-    //         })
+            })
 
-    // }
+    }
     
     return (
         <IndexLayout>
@@ -45,7 +47,7 @@ const IndexCadastro = () => {
                 <span className="login-form-title">Cadastrar</span>
 
                 <div className="wrap-input">
-                    <input className="input" type="text" value={name} onChange={(event)=>{setName(event.target.value)}}/>
+                    <input className="input" required type="text" value={name} onChange={(event)=>{setName(event.target.value)}}/>
                     <span
                         className="focus-input"
                         data-placeholder="NOME COMPLETO"
@@ -53,7 +55,7 @@ const IndexCadastro = () => {
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" type="email" value={email} onChange={(event)=>{setEmail(event.target.value)}}/>
+                    <input className="input" required type="email" value={email} onChange={(event)=>{setEmail(event.target.value)}}/>
                     <span
                         className="focus-input"
                         data-placeholder="EMAIL"
@@ -61,12 +63,12 @@ const IndexCadastro = () => {
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" type="string" value={CPF} onChange={(event)=>{setCPF(event.target.value)}}/>
+                    <input className="input" required type="string" value={CPF} onChange={(event)=>{setCPF(event.target.value)}}/>
                     <span className="focus-input" data-placeholder="CPF"></span>
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" type="string" value={CNPJ} onChange={(event)=>{setCNPJ(event.target.value)}} />
+                    <input className="input" required type="string" value={CNPJ} onChange={(event)=>{setCNPJ(event.target.value)}} />
                     <span
                         className="focus-input"
                         data-placeholder="CNPJ"
@@ -74,7 +76,7 @@ const IndexCadastro = () => {
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" type="float" value={balance} onChange={(event)=>{setBalance(event.target.value)}}/>
+                    <input className="input" required type="float" value={balance} onChange={(event)=>{setBalance(event.target.value)}}/>
                     <span
                         className="focus-input"
                         data-placeholder="SALDO"
@@ -82,7 +84,7 @@ const IndexCadastro = () => {
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" type="password" value={password} onChange={(event)=>{setPassword(event.target.value)}}/>
+                    <input className="input" required type="password" value={password} onChange={(event)=>{setPassword(event.target.value)}}/>
                     <span
                         className="focus-input"
                         data-placeholder="SENHA"

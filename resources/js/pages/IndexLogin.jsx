@@ -8,7 +8,7 @@ const IndexLogin = () => {
                 <span className="login-form-title">Entrar Agora</span>
 
                 <div className="wrap-input">
-                    <input className="input" type="email" />
+                    <input className="input" required type="email" />
                     <span
                         className="focus-input"
                         data-placeholder="EMAIL"
@@ -16,7 +16,7 @@ const IndexLogin = () => {
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" type="password" />
+                    <input className="input" required type="password" />
                     <span
                         className="focus-input"
                         data-placeholder="SENHA"
