@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class DepositController extends Controller
 {
@@ -22,5 +23,7 @@ class DepositController extends Controller
         $user->save();
 
         return response()->json($user, 200);
+
+        return Inertia::render(response()->json($user, 200));
     }
 }
