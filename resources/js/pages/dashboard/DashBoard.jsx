@@ -1,6 +1,6 @@
 import React from "react";
 import IndexLayout from "../../components/LayoutComponents/IndexLayout";
-import './styleDashBoard.css'
+import "./styleDashBoard.css";
 
 const DashBoard = () => {
     return (
@@ -11,14 +11,16 @@ const DashBoard = () => {
                 <span>Conta:</span>
                 <span>Nome Completo:</span>
                 <span>Saldo:</span>
+            </div>
 
-            </div>
-            
             <div className="container-btn-depositar-transferir">
-                <button className="btn-depositar-transferir">DEPOSITAR</button>
-                <button className="btn-depositar-transferir">TRANSFERIR</button>
+                <a className="btn-depositar-transferir" href="/deposito">
+                    DEPOSITAR
+                </a>
+                <a className="btn-depositar-transferir" href="/transferencia">
+                    TRANSFERIR
+                </a>
             </div>
-         
         </IndexLayout>
     );
 };

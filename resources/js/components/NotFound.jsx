@@ -1,10 +1,13 @@
-import React from 'react'
+import React from "react";
+import IndexLayout from "../components/LayoutComponents/IndexLayout";
 
 const NotFound = () => {
     return(
-        <div>
-            <h1>Página não Encontrada</h1>
-        </div>
+        <IndexLayout>
+            <div>
+                 <span className="user-title">Página não encontrada</span>
+            </div>
+        </IndexLayout>
     )
 }
 
