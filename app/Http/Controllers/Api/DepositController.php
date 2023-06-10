@@ -24,6 +24,5 @@ class DepositController extends Controller
 
         return response()->json($user, 200);
 
-        return Inertia::render(response()->json($user, 200));
     }
 }

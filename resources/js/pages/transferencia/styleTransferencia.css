@@ -87,7 +87,8 @@
   outline: 0;
 }
 
-.input:focus+.focus-input::after {
+.input:focus+.focus-input::after,
+.input:valid+.focus-input::after  {
   top: -15px;
 }
 

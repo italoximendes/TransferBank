@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import IndexLayout from "../components/LayoutComponents/IndexLayout";
 import axios from "axios";
 
@@ -9,8 +10,8 @@ const IndexCadastro = () => {
 
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
-    const [CPF, setCPF] = useState("")
-    const [CNPJ, setCNPJ] = useState("")
+    const [cpf, setCPF] = useState("")
+    const [cnpj, setCNPJ] = useState("")
     const [balance, setBalance] = useState("")
     const [password, setPassword] =useState("")
 
@@ -21,27 +22,24 @@ const IndexCadastro = () => {
 
         formData.append('name', name)
         formData.append('email', email)
-        formData.append('CPF', CPF)
-        formData.append('CNPJ', CNPJ)
+        formData.append('cpf', cpf)
+        formData.append('cnpj', cnpj)
         formData.append('balance', balance)
         formData.append('password', password)
 
-        await axios.post('/api/users', FormData)
-            .then(({data})=>{
-                console.log('data', data)
-                toast.fire({
-                    icon:"success",
-                    title:"Usuario cadastrado com sucesso!"
-                })
-                navigate('/')
-            })
-            .catch(({response})=>{
-
-            })
+        await axios.post('/api/users',  formData)
+        .then(response=>{
+            toast.success('Cadastro realizado com sucesso!')
+        })
+        .catch(error =>{
+            toast.error('Erro ao realizar o cadastro.')
+        })
+      
 
     }
     
     return (
+        
         <IndexLayout>
             <form className="login-form">
                 <span className="login-form-title">Cadastrar</span>
@@ -63,12 +61,12 @@ const IndexCadastro = () => {
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" required type="string" value={CPF} onChange={(event)=>{setCPF(event.target.value)}}/>
+                    <input className="input" required type="string" value={cpf} onChange={(event)=>{setCPF(event.target.value)}}/>
                     <span className="focus-input" data-placeholder="CPF"></span>
                 </div>
 
                 <div className="wrap-input">
-                    <input className="input" required type="string" value={CNPJ} onChange={(event)=>{setCNPJ(event.target.value)}} />
+                    <input className="input" required type="string" value={cnpj} onChange={(event)=>{setCNPJ(event.target.value)}} />
                     <span
                         className="focus-input"
                         data-placeholder="CNPJ"
@@ -97,7 +95,7 @@ const IndexCadastro = () => {
 
                 <div className="text-center">
                     <span className="txt1">Já possui conta? </span>
-                    <a className="txt2" href="/login">
+                    <a className="txt2" href="/">
                         Entrar Agora
                     </a>
                 </div>
