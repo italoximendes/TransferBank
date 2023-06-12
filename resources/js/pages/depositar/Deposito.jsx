@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import IndexLayout from "../../components/LayoutComponents/IndexLayout";
 import "./styleDeposito.css";
@@ -7,8 +6,6 @@ import { toast } from "react-toastify";
 import { error } from "laravel-mix/src/Log";
 
 const Deposito = () => {
-
-    const navigate = useNavigate()
 
     const [destinatario_id, setDestinatario_id] = useState("")
     const [valor, setValor] = useState("")
@@ -27,7 +24,7 @@ const Deposito = () => {
                 toast.success('Deposito realizado com sucesso!')
             })
             .catch(errors =>{
-                toast.error(errors)
+                toast.error('Verifique sua conta e tente novamente!')
             })
         }   
 

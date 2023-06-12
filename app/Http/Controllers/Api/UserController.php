@@ -29,11 +29,29 @@ class UserController extends Controller
 
     }
 
+    public function dashboard($id)
+    {
+        // Encontra o usuário correspondente no banco de dados
+        $user = User::find($id);
+
+        // Verifica se o usuário existe
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
+        }
+
+        // Retorna os dados do usuário como resposta
+        return response()->json($user);
+    }
+
     public function show(string $id)
     {
-        $user = User::findOrFail($id);
+        $user = User::find($id);
 
-        return new UserResource($user);
+        if (!$user) {
+            return response()->json(['message' => 'Usuário não encontrado'], 404);
+        }
+
+        return response()->json($user);
 
     }
 

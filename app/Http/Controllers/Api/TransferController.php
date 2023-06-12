@@ -8,7 +8,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
-use Inertia\Inertia;
+
 
 class TransferController extends Controller
 {
@@ -66,7 +66,7 @@ class TransferController extends Controller
 
            return response()->json($transfer, 201);
 
-           return Inertia::render(response()->json($transfer, 201));
+
         } catch (\Exception $e) {
             // Reverte a transação em caso de erro
             DB::rollBack();

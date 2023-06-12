@@ -32,7 +32,7 @@ const IndexCadastro = () => {
             toast.success('Cadastro realizado com sucesso!')
         })
         .catch(error =>{
-            toast.error('Erro ao realizar o cadastro.')
+            toast.error('Verifique se todos os campos estão preenchidos e tente novamente!')
         })
       
 
@@ -93,13 +93,12 @@ const IndexCadastro = () => {
                     <button className="login-form-btn" onClick={(event)=>store(event)}>Cadastrar</button>
                 </div>
 
-                <div className="text-center">
-                    <span className="txt1">Já possui conta? </span>
-                    <a className="txt2" href="/">
-                        Entrar Agora
-                    </a>
-                </div>
             </form>
+            <div className="text-center">
+                <a className="txt2" href="/dashboard">
+                   Ir para o Dashboard
+                </a>
+            </div>
         </IndexLayout>
     );
 };

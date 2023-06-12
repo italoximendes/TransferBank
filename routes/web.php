@@ -1,6 +1,9 @@
 <?php
 
+use Illuminate\Console\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
+
 
 Route::get('/*', function () {
     return view('index');
@@ -15,7 +18,7 @@ Route::get('/cadastro', function () {
     return view('index');
 });
 
-Route::get('/dashboard/{id}', function () {
+Route::get('/dashboard', function () {
     return view('index');
 });
 
@@ -26,4 +29,6 @@ Route::get('/transferencia', function () {
 Route::get('/deposito', function () {
     return view('index');
 });
+
+
 
