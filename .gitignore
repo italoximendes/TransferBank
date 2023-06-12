@@ -1,6 +1,5 @@
 /.phpunit.cache
-/bootstrap/ssr
-/node_modules
+/bootstrap/ssrco
 /public/build
 /public/hot
 /public/storage
@@ -18,3 +17,4 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+node_modules
