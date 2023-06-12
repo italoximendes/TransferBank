@@ -18,7 +18,8 @@ O protótipo de transferência bancária é uma representação inicial e funcio
 - Axios;
 
 ### Imagens do projeto
-![TRANSFERBANK](https://github.com/italoximendes/TransferBank/assets/65295398/761d1ad1-606f-4fed-880c-bb53cf868d7e)
+![TRANSFERBANK](https://github.com/italoximendes/TransferBank/assets/65295398/4f5b710b-97d2-4d77-90c4-94708692c8c5)
+
 
 
 
