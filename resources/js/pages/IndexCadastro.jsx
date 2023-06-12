@@ -42,7 +42,7 @@ const IndexCadastro = () => {
         
         <IndexLayout>
             <form className="login-form">
-                <span className="login-form-title">Cadastrar</span>
+                <span className="login-form-title">Cadastro</span>
 
                 <div className="wrap-input">
                     <input className="input" required type="text" value={name} onChange={(event)=>{setName(event.target.value)}}/>

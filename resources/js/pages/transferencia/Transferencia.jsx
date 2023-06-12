@@ -35,7 +35,7 @@ const Transferencia = () => {
 
     return (
         <IndexLayout>
-            <span className="user-title">Tranferência</span>
+            <span className="user-title">Transferência</span>
 
             <div className="wrap-input">
                 <input
