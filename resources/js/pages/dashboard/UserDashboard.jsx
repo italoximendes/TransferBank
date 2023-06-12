@@ -70,7 +70,7 @@ const UserDashboard = () => {
                             CNPJ: <strong className="set-user"> {users.cnpj}</strong>
                         </span>
                         <span>
-                            SALDO: <strong className="set-user"> {users.balance}</strong>
+                            SALDO: <strong className="set-user">R$ {users.balance}</strong>
                         </span>
                     </div>
 
