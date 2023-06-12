@@ -14,6 +14,7 @@ O protótipo de transferência bancária é uma representação inicial e funcio
 - React;
 - CSS;
 - Blade;
+- Vite;
 - Toastify;
 - Axios;
 
