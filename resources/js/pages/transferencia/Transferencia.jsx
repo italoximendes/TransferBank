@@ -27,7 +27,7 @@ const Transferencia = () => {
                 toast.success('Transferência realizada com sucesso!')
             })
             .catch(error =>{
-                toast.warning('Logistas não estão autorizados a realizar transferência!')
+                toast.warn('Logistas não estão autorizados a realizar transferência!')
                 toast.error('Verifique a conta e valor e tente novamente!')
             })
         } 
